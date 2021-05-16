@@ -5,7 +5,7 @@ const Home = () => {
   
   const [listings, updateListings] = React.useState([
     { 
-        id: '',
+        entryId: '',
         email: '', 
         title: '', 
         type: '', 
@@ -29,8 +29,8 @@ React.useEffect(() => {
       <br />
       <h1>All current listings are displayed below</h1>
       
-        {listings.map((listing) => (
-                <div className="listing" key={listing.id}>
+        {listings.map((listing, entryId) => (
+                <div className="listing" key={entryId}>
                     <h4>User's Email: {listing.email}</h4>
                     <h4>Item: {listing.title}</h4>
                     <h4>Category: {listing.type}</h4>

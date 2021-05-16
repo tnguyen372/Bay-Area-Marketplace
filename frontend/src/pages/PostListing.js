@@ -8,7 +8,7 @@ const PostListing = ({ ws }) => {
     const [type, setType] = React.useState('');
     const [price, setPrice] = React.useState('');
     const [description, setDescription] = React.useState('');
-    const [listings, updateListings] = React.useState([
+    const [userListings, addListing] = React.useState([
         { 
             entryId: '',
             email: '', 
@@ -28,8 +28,9 @@ const PostListing = ({ ws }) => {
             price: price,
             description: description
         };
+        addListing(email, title, type, price, description);
         axios.post('/postListing', listing)
-
+            .then (viewListings);
         // Empty the input fields after creating a listing  
         setEmail('');   
         setTitle('');
@@ -37,37 +38,43 @@ const PostListing = ({ ws }) => {
         setPrice('');
         setDescription('');
     };
+    // Shows all the user's submitted posts
+    const viewListings = () => {
+        userListings.map(listing => (
+            <div className="listing" key={listing.entryId}>
+            <h4>Email: {listing.email}</h4>
+            <h4>Item: {listing.title}</h4>
+            <h4>Category: {listing.type}</h4>
+            <h4>Price: ${listing.price}</h4>
+            <h4>Description: {listing.description}</h4>
+            <button onClick={deleteListing(listing.entryId)}>Delete Listing</button>
+            </div>
+        ))
+      }
+    // Delete a listing
+    const deleteListing = (entryId) => {
+        // Temporarily store the filtered listing
+        // const updatedListing = listings.filter(listing => listing.id !== id);
+        // updateListings(updatedListing);
+        axios.delete('/deleteListing', { data: {entryId: {entryId}} })
+          .then(viewListings);
+    };
 
-    // function viewListings () {
-    //     axios.get('/viewListings')
-    //       .then((res) => {
-    //         updateListings(res.data);
-    //       });
-    //   }
+    React.useEffect(() => {
+        console.log('use effect ran');
 
-    // const deleteListing = (entryId) => {
-    //     // Temporarily store the filtered listing
-    //     // const updatedListing = listings.filter(listing => listing.id !== id);
-    //     // updateListings(updatedListing);
-    //     axios.delete('/deleteListing', { data: {entryId: {entryId}} })
-    //       .then(viewListings);
-    // };
-
-    // React.useEffect(() => {
-    //     console.log('use effect ran');
-
-    //     ws.addEventListener('listing', (listings) => {
-    //         const parsedData = JSON.parse(listings.data);
-    //         updateListings(parsedData.listing);
-    //     })
-    // }, [ws]);
+        ws.addEventListener('listing', (listings) => {
+            const parsedData = JSON.parse(listings.data);
+            userListings(parsedData.listing);
+        })
+    }, [ws, userListings]);
 
     return (
         <div>
         <h1>What would you like to post?</h1>
             <div>
+                {/*User enters data here*/}
                 <form>
-                    {/* Listing Input Fields */}
                     <label>Email Address: </label>
                     <input 
                         id="input-email"
@@ -119,16 +126,7 @@ const PostListing = ({ ws }) => {
                 </form>
                 <div>
                     <h2>Here are your posts: </h2>
-                    {listings.map((listing) => (
-                        <div className="listing" key={listing.entryId}>
-                        <h4>Email: {listing.email}</h4>
-                        <h4>Item: {listing.title}</h4>
-                        <h4>Category: {listing.type}</h4>
-                        <h4>Price: ${listing.price}</h4>
-                        <h4>Description: {listing.description}</h4>
-                        <button >Delete Listing</button>
-                        </div>
-                    ))}
+                    
                 </div>
             </div>
         </div>
