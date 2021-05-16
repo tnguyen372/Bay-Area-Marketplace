@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-
+import './Home.css';
 const Home = ({ ws }) => {
 
   const [listings, updateListings] = React.useState([
@@ -36,11 +36,12 @@ const Home = ({ ws }) => {
   }, [ws]);
 
   return (
-    <div id="title-header">
-      <h1 className="home-header">Welcome to the Home Page!</h1>
-      <br />
-      <h1>All current listings are displayed below</h1>
-      <h5>There are {listings.length} listings being shown</h5>
+    <div>
+      <div className="header">
+        <h1 className="home-header">Welcome to the Home Page!</h1>
+        <br />
+        <h1>There are currently {listings.length} listings available</h1>
+      </div>
       <div className="container">
         {listings.map((listing, entryId) => (
           <div className="listing" key={entryId}>
@@ -56,7 +57,7 @@ const Home = ({ ws }) => {
             <h4>Category</h4>
             <h4>{listing.type}</h4>
             <h4>Price</h4>
-            <h4>{listing.price}</h4>
+            <h4>${listing.price}</h4>
             <h4>Description</h4>
             <h4>{listing.description}</h4>
           </div>
