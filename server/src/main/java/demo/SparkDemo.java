@@ -30,7 +30,7 @@ public class SparkDemo {
     MongoCollection<Document> myCollection = db.getCollection("myCollection");
 
     // create a listing
-    post("/createListing", (req, res) -> {
+    post("/postListing", (req, res) -> {
       // generate id
       String entryId = String.valueOf(Math.random());
       // listing object
