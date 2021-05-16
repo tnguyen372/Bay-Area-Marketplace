@@ -46,13 +46,13 @@ public class SparkDemo {
       myCollection.insertOne(doc);
       System.out.println("Post " + entryId + " was created successfully");
 
-      // will implement websocket/broadcast here
-
+      List<Document> listingList = myCollection.find().into(new ArrayList<Document>());
+      WebSocketHandler.broadcast(gson.toJson(listingList));
       return myCollection.countDocuments();
     });
 
     // delete listing
-    post("/deleteListing", (req, res) -> {
+    delete("/deleteListing", (req, res) -> {
       String entryId = req.queryMap("entryId").value();
       myCollection.deleteOne(eq("entryId", entryId));
       System.out.println("Post " + entryId + " was deleted successfully");
@@ -62,12 +62,6 @@ public class SparkDemo {
     // view listings
     get("/viewListings", (req, res) -> {
       List<Document> listingList = myCollection.find().into(new ArrayList<Document>());
-
-//      // will make this simpler for the frontend to use
-//      listingList.forEach(listing ->{
-//        System.out.println(listing.getString("email"));
-//      });
-
       return gson.toJson(listingList);
     });
   }

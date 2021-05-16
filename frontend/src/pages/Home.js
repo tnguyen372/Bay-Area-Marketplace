@@ -1,43 +1,67 @@
 import React from 'react';
 import axios from 'axios';
 
-const Home = () => {
-  
+const Home = ({ ws }) => {
+
   const [listings, updateListings] = React.useState([
-    { 
-        entryId: '',
-        email: '', 
-        title: '', 
-        type: '', 
-        price: 0.00, 
-        description: ''
+    {
+      entryId: '',
+      email: '',
+      title: '',
+      type: '',
+      price: 0.00,
+      description: ''
     }
-]);
+  ]);
 
 
-  
-React.useEffect(() => {
-  axios.get('/viewListings')
+
+
+  // const deleteListing = (entryId) => {
+  //   axios.delete(`/deleteListing?entryId=${entryId}`);
+  // }
+
+
+
+  React.useEffect(() => {
+    axios.get('/viewListings')
       .then((res) => {
         updateListings(res.data);
       });
-}, []);
+
+    ws.addEventListener('message', (message) => {
+      const parsedData = JSON.parse(message.data);
+      updateListings(parsedData);
+    })
+  }, [ws]);
 
   return (
     <div id="title-header">
-      <h1>Welcome to the Home Page!</h1> 
+      <h1 className="home-header">Welcome to the Home Page!</h1>
       <br />
       <h1>All current listings are displayed below</h1>
-      
+      <h5>There are {listings.length} listings being shown</h5>
+      <div className="container">
         {listings.map((listing, entryId) => (
-                <div className="listing" key={entryId}>
-                    <h4>User's Email: {listing.email}</h4>
-                    <h4>Item: {listing.title}</h4>
-                    <h4>Category: {listing.type}</h4>
-                    <h4>Price: ${listing.price}</h4>
-                    <h4>Description: {listing.description}</h4>
-                </div>
+          <div className="listing" key={entryId}>
+            {/* <h4>User's Email: {listing.email}</h4>
+            <h4>Item: {listing.title}</h4>
+            <h4>Category: {listing.type}</h4>
+            <h4>Price: ${listing.price}</h4>
+            <h4>Description: {listing.description}</h4> */}
+            <h4>User's Email</h4>
+            <h4>{listing.email}</h4>
+            <h4>Title</h4>
+            <h4>{listing.title}</h4>
+            <h4>Category</h4>
+            <h4>{listing.type}</h4>
+            <h4>Price</h4>
+            <h4>{listing.price}</h4>
+            <h4>Description</h4>
+            <h4>{listing.description}</h4>
+          </div>
         ))}
+      </div>
     </div>
   );
 };

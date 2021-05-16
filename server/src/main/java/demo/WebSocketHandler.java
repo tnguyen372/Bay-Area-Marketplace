@@ -12,6 +12,15 @@ public class WebSocketHandler {
   static Map<Session, Session> sessionMap = new ConcurrentHashMap<>();
 
   // will implement broadcast here
+  public static void broadcast(String message){
+    sessionMap.keySet().forEach(session -> {
+      try {
+        session.getRemote().sendString(message);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    });
+  }
 
   @OnWebSocketConnect
   public void connected(Session session) throws IOException {
