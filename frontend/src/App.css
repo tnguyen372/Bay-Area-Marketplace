@@ -77,6 +77,12 @@ body {
   background-color: rgb(27, 112, 146);
 }
 
+.listing-element {
+  width: 90%;
+  height: 40px;
+  overflow: scroll;
+}
+
 @media screen and (max-width: 1070px) {
   .container{
       grid-template-columns: repeat(3, 1fr);

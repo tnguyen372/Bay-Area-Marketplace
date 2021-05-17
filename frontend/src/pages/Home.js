@@ -3,36 +3,37 @@ import axios from 'axios';
 import './Home.css';
 const Home = ({ ws }) => {
 
-  const [listings, updateListings] = React.useState([
-    {
-      entryId: '',
-      email: '',
-      title: '',
-      type: '',
-      price: 0.00,
-      description: ''
-    }
-  ]);
+  const [listings, updateListings] = React.useState([]);
+  //   {
+  //     entryId: '',
+  //     email: '',
+  //     title: '',
+  //     type: '',
+  //     price: 0.00,
+  //     description: ''
+  //   }
+  // ]);
 
-
-
+  const fetchListings = () => {
+    axios.get('/viewListings')
+      .then((res) => {
+        updateListings(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
 
   // const deleteListing = (entryId) => {
   //   axios.delete(`/deleteListing?entryId=${entryId}`);
   // }
 
-
-
   React.useEffect(() => {
-    axios.get('/viewListings')
-      .then((res) => {
-        updateListings(res.data);
-      });
+
+    fetchListings();
 
     ws.addEventListener('message', (message) => {
       const parsedData = JSON.parse(message.data);
       updateListings(parsedData);
-    })
+    });
   }, [ws]);
 
   return (
@@ -51,15 +52,15 @@ const Home = ({ ws }) => {
             <h4>Price: ${listing.price}</h4>
             <h4>Description: {listing.description}</h4> */}
             <h4>User's Email</h4>
-            <h4>{listing.email}</h4>
+            <h4 className="listing-element">{listing.email}</h4>
             <h4>Title</h4>
-            <h4>{listing.title}</h4>
+            <h4 className="listing-element">{listing.title}</h4>
             <h4>Category</h4>
-            <h4>{listing.type}</h4>
+            <h4 className="listing-element">{listing.type}</h4>
             <h4>Price</h4>
-            <h4>${listing.price}</h4>
+            <h4 className="listing-element">${listing.price}</h4>
             <h4>Description</h4>
-            <h4>{listing.description}</h4>
+            <h4 className="listing-element">{listing.description}</h4>
           </div>
         ))}
       </div>
