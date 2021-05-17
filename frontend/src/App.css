@@ -57,7 +57,7 @@ body {
   text-align: center;
 }
 
-.container {
+#container {
   display: grid;
   /* grid-template-rows: repeat(4, 1fr); */
   grid-template-columns: repeat(4, 1fr);
@@ -113,7 +113,7 @@ body {
 }
 
 
-.btn {
+#button {
     background-color: rgb(27, 112, 146);
     color: whitesmoke;
     margin: 10px 0px;
@@ -124,4 +124,13 @@ body {
     font-size: 1.2em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     
+}
+
+.form-container {
+  border: 2px solid mintcream;
+  display: inline-grid;
+  justify-content: center;
+  grid-template-rows: repeat(5, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+
 }

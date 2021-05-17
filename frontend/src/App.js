@@ -1,11 +1,13 @@
 import React from 'react';
-import './App.css';
 import { Switch, Route, Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 import Home from './pages/Home';
 import PostListing from './pages/PostListing';
 //import Login from './pages/Login';
 //import Signup from './pages/Signup';
 import UserPage from './pages/UserPage';
+import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 const App = ({ ws }) => {
@@ -13,9 +15,9 @@ const App = ({ ws }) => {
   return (
     <div>
       <nav className="nav-bar">
-      <Link to="/"> <button className="btn">Home</button></Link>
-        <Link to="/postListing"><button className="btn">Post a Listing</button></Link>
-        <Link to="/user"><button className="btn">User Page</button></Link>
+      <Link to="/"> <Button id="button">Home</Button></Link>
+        <Link to="/postListing"><Button id="button">Post a Listing</Button></Link>
+        <Link to="/user"><Button id="button">User Page</Button></Link>
       </nav>
       <Switch>
         <Route path="/user">

@@ -1,6 +1,10 @@
 import React from 'react';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-
+import './PostListing.css';
 
 const PostListing = ({ ws }) => {
   
@@ -9,6 +13,9 @@ const PostListing = ({ ws }) => {
     const [type, setType] = React.useState('');
     const [price, setPrice] = React.useState('');
     const [description, setDescription] = React.useState('');
+
+
+    
 
     // Submit a listing
 
@@ -19,11 +26,13 @@ const PostListing = ({ ws }) => {
             type: type,
             price: price,
             description: description
+
         };
 
         axios.post('/postListing', listing)
         .catch((err) => console.log(err));
-         
+      
+        alert('Your post was submitted!');
         // Empty the input fields after creating a listing  
         setEmail('');   
         setTitle('');
@@ -32,6 +41,9 @@ const PostListing = ({ ws }) => {
         setDescription('');
 
     };
+    
+
+
 
     return (
         <div>
@@ -95,7 +107,7 @@ const PostListing = ({ ws }) => {
             </div>
         </div>
     
-  );
+    );
 };
 
 export default PostListing;

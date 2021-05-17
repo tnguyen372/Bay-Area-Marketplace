@@ -38,12 +38,12 @@ const Home = ({ ws }) => {
 
   return (
     <div>
-      <div className="header">
-        <h1 className="home-header">Welcome to the Home Page!</h1>
+      <div className="home-header">
+        <h1>Welcome to the Home Page!</h1>
         <br />
         <h1>There are currently {listings.length} listings available</h1>
       </div>
-      <div className="container">
+      <div id="container">
         {listings.map((listing, entryId) => (
           <div className="listing" key={entryId}>
             {/* <h4>User's Email: {listing.email}</h4>
