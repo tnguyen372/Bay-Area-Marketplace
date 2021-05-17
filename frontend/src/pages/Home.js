@@ -16,11 +16,27 @@ const Home = ({ ws }) => {
       .catch((err) => console.log(err));
   }
 
-  // const deleteListing = (entryId) => {
-  //   axios.delete(`/deleteListing?entryId=${entryId}`);
-  // }
-  const handleInquiry = () => {
+  const handleInquiry = (id, e) => {
 
+    if (email === "" || inquiry === "") {
+      alert("Cannot submit a blank inquiry");
+    } else {
+      const body = {
+        entryId: id,
+        inquiryEmail: email,
+        inquiryMessage: inquiry
+      };
+
+      console.log("the id is " + id);
+      console.log("the email is " + email);
+      console.log("the message is " + inquiry);
+      axios.put('/sendInquiry', body)
+        .then((res) => console.log(res))
+        .catch((err) => console.log(err));
+
+      setEmail('');
+      setInquiry('');
+    }
   };
 
   React.useEffect(() => {
@@ -53,19 +69,19 @@ const Home = ({ ws }) => {
             <h4 className="listing-element">${listing.price}</h4>
             <h4>Description</h4>
             <h4 className="listing-element">{listing.description}</h4>
-            <input 
-              type="email" 
-              value ={email} 
-              placeholder="Enter your email" 
+            <input
+              type="email"
+              value={email}
+              placeholder="Enter your email"
               onChange={(event) => setEmail(event.target.value)}>
             </input>
-            <input 
-              type="textarea" 
-              value={inquiry} 
+            <input
+              type="textarea"
+              value={inquiry}
               onChange={(event) => setInquiry(event.target.value)}
               placeholder="Ask a question or make an offer!">
             </input>
-            <Button id="button" type="submit" onClick={handleInquiry}>Submit Inquiry</Button>
+            <Button id="button" type="submit" onClick={(e) => handleInquiry(listing.entryId, e)}>Submit Inquiry</Button>
           </div>
         ))}
       </div>

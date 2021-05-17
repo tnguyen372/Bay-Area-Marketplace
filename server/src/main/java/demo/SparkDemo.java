@@ -5,6 +5,8 @@ import static com.mongodb.client.model.Filters.*;
 
 
 import com.google.gson.Gson;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -12,6 +14,7 @@ import com.mongodb.client.MongoDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mongodb.client.model.Updates;
 import org.bson.Document;
 
 public class SparkDemo {
@@ -36,12 +39,14 @@ public class SparkDemo {
       // listing object
       ListingDto listingDto = gson.fromJson(req.body(), ListingDto.class);
 
+      List<Document> list = new ArrayList<>();
       Document doc = new Document("entryId", entryId)
               .append("email", listingDto.email)
               .append("title", listingDto.title)
               .append("type", listingDto.type)
               .append("description", listingDto.description)
-              .append("price", listingDto.price);
+              .append("price", listingDto.price)
+              .append("inquiries", list);
 
       myCollection.insertOne(doc);
       System.out.println("Post " + entryId + " was created successfully");
@@ -49,6 +54,19 @@ public class SparkDemo {
       List<Document> listingList = myCollection.find().into(new ArrayList<Document>());
       WebSocketHandler.broadcast(gson.toJson(listingList));
       return myCollection.countDocuments();
+    });
+
+    //update listing inquiries
+    put("/sendInquiry", (req, res) -> {
+
+      InquiryDto inquiryDto = gson.fromJson(req.body(), InquiryDto.class);
+
+      Document inquiry = new Document()
+              .append("inquiryEmail", inquiryDto.inquiryEmail)
+              .append("inquiryMessage", inquiryDto.inquiryMessage);
+      myCollection.updateOne(eq("entryId", inquiryDto.entryId), Updates.addToSet("inquiries", inquiry));
+
+      return "ok got it";
     });
 
     // delete listing
@@ -67,8 +85,8 @@ public class SparkDemo {
 
     // get listings with given email
     get("/user", (req, res) -> {
-      ListingDto listingDto = gson.fromJson(req.body(), ListingDto.class);
-      List<Document> listingList = myCollection.find(eq("email", listingDto.email)).into(new ArrayList<Document>());
+      String email = req.queryMap("email").value();
+      List<Document> listingList = myCollection.find(eq("email", email)).into(new ArrayList<Document>());
       return gson.toJson(listingList);
     });
   }
