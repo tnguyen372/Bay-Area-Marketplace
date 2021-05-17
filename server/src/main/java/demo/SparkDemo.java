@@ -64,5 +64,12 @@ public class SparkDemo {
       List<Document> listingList = myCollection.find().into(new ArrayList<Document>());
       return gson.toJson(listingList);
     });
+
+    // get listings with given email
+    get("/user", (req, res) -> {
+      ListingDto listingDto = gson.fromJson(req.body(), ListingDto.class);
+      List<Document> listingList = myCollection.find(eq("email", listingDto.email)).into(new ArrayList<Document>());
+      return gson.toJson(listingList);
+    });
   }
 }
