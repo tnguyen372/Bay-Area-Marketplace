@@ -31,7 +31,6 @@ const PostListing = ({ ws }) => {
 
         axios.post('/postListing', listing)
         .catch((err) => console.log(err));
-      
         alert('Your post was submitted!');
         // Empty the input fields after creating a listing  
         setEmail('');   
@@ -50,60 +49,81 @@ const PostListing = ({ ws }) => {
         <h1>What would you like to post?</h1>
             <div>
                 {/*User enters data here*/}
-                <form>
-                    <label>Email Address: </label>
-                    <input 
-                        id="input-email"
-                        type="email"
-                        required 
-                        value={email} 
-                        onChange={(event) => setEmail(event.target.value)}/>
-                    <br />
-                    <br />
-                    <label>Title: </label>
-                    <input 
-                        id="input-title"
-                        type="text"
-                        required  
-                        value={title} 
-                        onChange={(event) => setTitle(event.target.value)} />
-                    <br />
-                    <br />
-                    <label>Type: </label>
-                    <input 
-                        id="input-type"
-                        type="text"
-                        required 
-                        value={type} 
-                        onChange={(event) => setType(event.target.value)} />
-                    <br />
-                    <br />
-                    <label>Price: </label>
-                    <input 
-                        id="input-price"
-                        type="number"
-                        step="0.01"  // Allows input to include decimal numbers up to 2 decimal places 
-                        min="0.00"  // Minimum price is $0.00
-                        required 
-                        value={price} 
-                        onChange={(event) => setPrice(event.target.value)} />
-                    <br />
-                    <br />
-                    <label>Description: </label>
-                    <textarea 
-                        id="input-description"
-                        type="text"
-                        required
-                        value={description} 
-                        onChange={(event) => setDescription(event.target.value)} />
-                    <br />
-                    <br />
-                    <button id="submit" type="submit" onClick={createListing}>Create Listing</button>
-                </form>
-                <div>
-                    <h2>Here are your posts: </h2>
-                    
-                </div>
+                <Form >
+                    <Form.Group as={Form.Row} controlId="input-email">
+                        <Form.Label column sm={2}>
+                        Email Address
+                        </Form.Label>
+                        <Col sm={10}>
+                        <Form.Control 
+                            type="email" 
+                            value={email}
+                            placeholder="Email"  
+                            onChange={(event) => setEmail(event.target.value)}  
+                        />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Form.Row} controlId="input-title">
+                        <Form.Label column sm={2}>
+                        Title
+                        </Form.Label>
+                        <Col sm={10}>
+                            <Form.Control 
+                                type="text" 
+                                value={title}
+                                placeholder="Title"  
+                                onChange={(event) => setTitle(event.target.value)} 
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} controlId="input-type">
+                        <Form.Label column sm={2}>
+                        Category
+                        </Form.Label>
+                        <Col sm={10}>
+                            <Form.Control 
+                                type="text" 
+                                value={type}
+                                placeholder="Category Type" 
+                                onChange={(event) => setType(event.target.value)} 
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Form.Row} controlId="input-price">
+                        <Form.Label column sm={2}>
+                        Price
+                        </Form.Label>
+                        <Col sm={10}>
+                            <Form.Control 
+                                type="number"
+                                step="0.01"
+                                min="0.00" 
+                                value={price}
+                                placeholder="Price" 
+                                onChange={(event) => setPrice(event.target.value)} 
+                            />
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Form.Row} controlId="input-description">
+                        <Form.Label column sm={2}>
+                        Description
+                        </Form.Label>
+                        <Col sm={10}>
+                            <Form.Control 
+                                as="textarea" 
+                                value={description}
+                                placeholder="Add a description of what you're selling" 
+                                onChange={(event) => setDescription(event.target.value)} 
+                            />
+                        </Col>
+                    </Form.Group>
+                        <Form.Group as={Form.Row}>
+                        <Col sm={{ span: 10, offset: 2 }}>
+                        <Button type="submit" onClick={createListing}>CreateListing</Button>
+                        </Col>
+                    </Form.Group>
+            </Form>
+                
             </div>
         </div>
     
