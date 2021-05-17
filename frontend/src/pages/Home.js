@@ -26,10 +26,7 @@ const Home = ({ ws }) => {
         inquiryEmail: email,
         inquiryMessage: inquiry
       };
-
-      console.log("the id is " + id);
-      console.log("the email is " + email);
-      console.log("the message is " + inquiry);
+      
       axios.put('/sendInquiry', body)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));

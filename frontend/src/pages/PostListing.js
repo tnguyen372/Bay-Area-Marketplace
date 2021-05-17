@@ -14,9 +14,6 @@ const PostListing = ({ ws }) => {
     const [price, setPrice] = React.useState('');
     const [description, setDescription] = React.useState('');
 
-
-    
-
     // Submit a listing
 
     const createListing = () => {
@@ -26,7 +23,6 @@ const PostListing = ({ ws }) => {
             type: type,
             price: price,
             description: description
-
         };
 
         axios.post('/postListing', listing)
@@ -38,10 +34,8 @@ const PostListing = ({ ws }) => {
         setType('');
         setPrice('');
         setDescription('');
-
     };
     
-
     return (
         <div>
         <h1>What would you like to post?</h1>

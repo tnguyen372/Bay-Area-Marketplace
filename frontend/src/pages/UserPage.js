@@ -7,40 +7,36 @@ const UserPage = ({ ws }) => {
 
   const [email, setEmail] = React.useState('');
   const [listings, updateListings] = React.useState([]);
+  //const [clicked, setClicked] = React.useState(false);
 
   // Fetch all the currently available inquiries
   const fetchFilteredListings = () => {
 
     axios.get('/user', { params: { email: email } })
       .then((res) => {
-        if(res.data.length === 0){
+        if (res.data.length === 0) {
           alert('There are no listings under the given email');
         } else {
           updateListings(res.data);
-        }   
+        }
       })
       .catch((err) => console.log(err));
   }
 
   function deleteListing(entryId, e) {
     axios.delete(`/deleteListing?entryId=${entryId}`)
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-
-        updateListings(listings.filter(listing => listing.entryId !== entryId));
-      })
+      .then(fetchFilteredListings())
       .catch((err) => console.log(err));
-
   }
 
-  React.useEffect(() => {
+  // React.useEffect(() => {
 
-    ws.addEventListener('message', (message) => {
-      const parsedData = JSON.parse(message.data);
-      updateListings(parsedData);
-    });
-  }, [ws]);
+  //   ws.addEventListener('message', (message) => {
+  //     const parsedData = JSON.parse(message.data);
+  //     console.log("RECEIVED INQUIRY UPDATE!");
+  //     updateListings(parsedData);
+  //   });
+  // }, [ws]);
 
   return (
     <div>

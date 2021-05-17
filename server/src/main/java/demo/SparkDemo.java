@@ -49,7 +49,7 @@ public class SparkDemo {
               .append("inquiries", list);
 
       myCollection.insertOne(doc);
-      System.out.println("Post " + entryId + " was created successfully");
+      System.out.println("Listing " + entryId + " was created successfully");
 
       List<Document> listingList = myCollection.find().into(new ArrayList<Document>());
       WebSocketHandler.broadcast(gson.toJson(listingList));
@@ -60,24 +60,28 @@ public class SparkDemo {
     put("/sendInquiry", (req, res) -> {
 
       InquiryDto inquiryDto = gson.fromJson(req.body(), InquiryDto.class);
-
       Document inquiry = new Document()
               .append("inquiryEmail", inquiryDto.inquiryEmail)
               .append("inquiryMessage", inquiryDto.inquiryMessage);
       myCollection.updateOne(eq("entryId", inquiryDto.entryId), Updates.addToSet("inquiries", inquiry));
 
-      return "ok got it";
+      System.out.println("Listing " + inquiryDto.entryId + " was updated successfully");
+      return "Received listing update request";
     });
 
     // delete listing
     delete("/deleteListing", (req, res) -> {
       String entryId = req.queryMap("entryId").value();
       myCollection.deleteOne(eq("entryId", entryId));
-      System.out.println("Post " + entryId + " was deleted successfully");
+      System.out.println("Listing " + entryId + " was deleted successfully");
+
+      List<Document> listingList = myCollection.find().into(new ArrayList<Document>());
+      WebSocketHandler.broadcast(gson.toJson(listingList));
+
       return myCollection.countDocuments();
     });
 
-    // view listings
+    // view all listings
     get("/viewListings", (req, res) -> {
       List<Document> listingList = myCollection.find().into(new ArrayList<Document>());
       return gson.toJson(listingList);
@@ -87,6 +91,7 @@ public class SparkDemo {
     get("/user", (req, res) -> {
       String email = req.queryMap("email").value();
       List<Document> listingList = myCollection.find(eq("email", email)).into(new ArrayList<Document>());
+
       return gson.toJson(listingList);
     });
   }
