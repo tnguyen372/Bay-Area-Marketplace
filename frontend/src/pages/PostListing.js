@@ -42,19 +42,17 @@ const PostListing = ({ ws }) => {
     };
     
 
-
-
     return (
         <div>
         <h1>What would you like to post?</h1>
-            <div>
+            <div id="form-container">
                 {/*User enters data here*/}
-                <Form >
-                    <Form.Group as={Form.Row} controlId="input-email">
-                        <Form.Label column sm={2}>
+                <Form>
+                    <Form.Group as={Row} controlId="input-email">
+                        <Form.Label column sm={2} id="label">
                         Email Address
                         </Form.Label>
-                        <Col sm={10}>
+                        <Col sm={3}>
                         <Form.Control 
                             type="email" 
                             value={email}
@@ -63,11 +61,11 @@ const PostListing = ({ ws }) => {
                         />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Form.Row} controlId="input-title">
-                        <Form.Label column sm={2}>
+                    <Form.Group as={Row} controlId="input-title">
+                        <Form.Label column sm={2} id="label">
                         Title
                         </Form.Label>
-                        <Col sm={10}>
+                        <Col sm={3}>
                             <Form.Control 
                                 type="text" 
                                 value={title}
@@ -77,10 +75,10 @@ const PostListing = ({ ws }) => {
                         </Col>
                     </Form.Group>
                     <Form.Group as={Row} controlId="input-type">
-                        <Form.Label column sm={2}>
+                        <Form.Label column sm={2} id="label">
                         Category
                         </Form.Label>
-                        <Col sm={10}>
+                        <Col sm={3}>
                             <Form.Control 
                                 type="text" 
                                 value={type}
@@ -89,41 +87,40 @@ const PostListing = ({ ws }) => {
                             />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Form.Row} controlId="input-price">
-                        <Form.Label column sm={2}>
+                    <Form.Group as={Row} controlId="input-price">
+                        <Form.Label column sm={2} id="label">
                         Price
                         </Form.Label>
-                        <Col sm={10}>
+                        <Col sm={3}>
                             <Form.Control 
                                 type="number"
                                 step="0.01"
                                 min="0.00" 
                                 value={price}
-                                placeholder="Price" 
+                                placeholder="Enter the amount you're willing to sell it for." 
                                 onChange={(event) => setPrice(event.target.value)} 
                             />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Form.Row} controlId="input-description">
-                        <Form.Label column sm={2}>
+                    <Form.Group as={Row} controlId="input-description">
+                        <Form.Label column sm={2} id="label">
                         Description
                         </Form.Label>
-                        <Col sm={10}>
+                        <Col sm={3}>
                             <Form.Control 
                                 as="textarea" 
                                 value={description}
-                                placeholder="Add a description of what you're selling" 
+                                placeholder="Add a description of what you're selling!" 
                                 onChange={(event) => setDescription(event.target.value)} 
                             />
                         </Col>
                     </Form.Group>
                         <Form.Group as={Form.Row}>
                         <Col sm={{ span: 10, offset: 2 }}>
-                        <Button type="submit" onClick={createListing}>CreateListing</Button>
+                        <Button type="submit" onClick={createListing}>Create Listing</Button>
                         </Col>
                     </Form.Group>
-            </Form>
-                
+            </Form>    
             </div>
         </div>
     

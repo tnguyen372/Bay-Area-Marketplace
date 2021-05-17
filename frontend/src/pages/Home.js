@@ -1,18 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
 import './Home.css';
 const Home = ({ ws }) => {
 
   const [listings, updateListings] = React.useState([]);
-  //   {
-  //     entryId: '',
-  //     email: '',
-  //     title: '',
-  //     type: '',
-  //     price: 0.00,
-  //     description: ''
-  //   }
-  // ]);
+  const [email, setEmail] = React.useState('');
+  const [inquiry, setInquiry] = React.useState('');
 
   const fetchListings = () => {
     axios.get('/viewListings')
@@ -25,6 +19,9 @@ const Home = ({ ws }) => {
   // const deleteListing = (entryId) => {
   //   axios.delete(`/deleteListing?entryId=${entryId}`);
   // }
+  const handleInquiry = () => {
+
+  };
 
   React.useEffect(() => {
 
@@ -46,11 +43,6 @@ const Home = ({ ws }) => {
       <div id="container">
         {listings.map((listing, entryId) => (
           <div className="listing" key={entryId}>
-            {/* <h4>User's Email: {listing.email}</h4>
-            <h4>Item: {listing.title}</h4>
-            <h4>Category: {listing.type}</h4>
-            <h4>Price: ${listing.price}</h4>
-            <h4>Description: {listing.description}</h4> */}
             <h4>User's Email</h4>
             <h4 className="listing-element">{listing.email}</h4>
             <h4>Title</h4>
@@ -61,6 +53,19 @@ const Home = ({ ws }) => {
             <h4 className="listing-element">${listing.price}</h4>
             <h4>Description</h4>
             <h4 className="listing-element">{listing.description}</h4>
+            <input 
+              type="email" 
+              value ={email} 
+              placeholder="Enter your email" 
+              onChange={(event) => setEmail(event.target.value)}>
+            </input>
+            <input 
+              type="textarea" 
+              value={inquiry} 
+              onChange={(event) => setInquiry(event.target.value)}
+              placeholder="Ask a question or make an offer!">
+            </input>
+            <Button id="button" type="submit" onClick={handleInquiry}>Submit Inquiry</Button>
           </div>
         ))}
       </div>

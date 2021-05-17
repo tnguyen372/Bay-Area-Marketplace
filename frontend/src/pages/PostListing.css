@@ -3,3 +3,9 @@ h1 {
     color: mintcream;
 }
 
+#label {
+    color: mintcream;
+    text-align: center;
+    font-size: large;
+    align-content: center;
+}
