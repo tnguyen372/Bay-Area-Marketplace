@@ -76,7 +76,7 @@ const Home = ({ ws }) => {
               type="textarea"
               value={inquiry}
               onChange={(event) => setInquiry(event.target.value)}
-              placeholder="Ask a question or make an offer!">
+              placeholder="Make an offer!">
             </input>
             <Button id="button" type="submit" onClick={(e) => handleInquiry(listing.entryId, e)}>Submit Inquiry</Button>
           </div>

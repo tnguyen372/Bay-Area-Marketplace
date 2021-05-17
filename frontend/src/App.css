@@ -79,8 +79,8 @@ body {
 
 .listing-element {
   width: 90%;
-  height: 40px;
-  overflow: scroll;
+  height: 55px;
+  overflow-y: scroll;
 }
 
 @media screen and (max-width: 1070px) {
