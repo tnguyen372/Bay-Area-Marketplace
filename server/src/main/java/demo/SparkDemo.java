@@ -40,6 +40,11 @@ public class SparkDemo {
       ListingDto listingDto = gson.fromJson(req.body(), ListingDto.class);
 
       List<Document> list = new ArrayList<>();
+      Document inquiry = new Document()
+              .append("inquiryEmail", "")
+              .append("inquiryMessage", "");
+
+      list.add(inquiry);
       Document doc = new Document("entryId", entryId)
               .append("email", listingDto.email)
               .append("title", listingDto.title)

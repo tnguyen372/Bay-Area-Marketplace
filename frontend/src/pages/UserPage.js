@@ -14,6 +14,7 @@ const UserPage = ({ ws }) => {
 
     axios.get('/user', { params: { email: email } })
       .then((res) => {
+        console.log(res.data);
         if (res.data.length === 0) {
           alert('There are no listings under the given email');
         } else {
@@ -42,26 +43,36 @@ const UserPage = ({ ws }) => {
     <div>
       <h1>User Page</h1>
       <br />
-      <div className="inquiry">
+      <div className="inquiry-page">
         <h3><label>Check your inquiries by submitting your email here: </label></h3>
         <input type="text" value={email} placeholder="Enter your email" onChange={(event) => setEmail(event.target.value)}></input>
         <Button id="button" onClick={fetchFilteredListings}>Check Inquiries</Button>
       </div>
-      <div id="container">
+      <div id="user-container">
         {listings.map((listing, entryId) => (
-          <div className="listing" key={entryId}>
-            <h4>User's Email</h4>
-            <h4 className="listing-element">{listing.email}</h4>
-            <h4>Title</h4>
-            <h4 className="listing-element">{listing.title}</h4>
-            <h4>Category</h4>
-            <h4 className="listing-element">{listing.type}</h4>
-            <h4>Price</h4>
-            <h4 className="listing-element">${listing.price}</h4>
-            <h4>Description</h4>
-            <h4 className="listing-element">{listing.description}</h4>
+          <div className="user-listing-container" key={entryId}>
+            <div className="user-listing-fields">
+              <h4>User's Email</h4>
+              <h4 className="listing-element">{listing.email}</h4>
+              <h4>Title</h4>
+              <h4 className="listing-element">{listing.title}</h4>
+              <h4>Category</h4>
+              <h4 className="listing-element">{listing.type}</h4>
+              <h4>Price</h4>
+              <h4 className="listing-element">${listing.price}</h4>
+              <h4>Description</h4>
+              <h4 className="listing-element">{listing.description}</h4>
+            </div>
             <Button id="button" onClick={(e) => deleteListing(listing.entryId, e)}>Delete Listing</Button>
-
+            <h4>Inquiries({listing.inquiries.length-1}):</h4>
+            <div className="inquiries-container">
+              {listing.inquiries.map((inquiry, i) => (
+                <div className="inquiry" key={i}>
+                  <p><strong>{inquiry.inquiryEmail}</strong></p>
+                  <p>{inquiry.inquiryMessage}</p>
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>

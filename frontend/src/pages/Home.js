@@ -26,7 +26,7 @@ const Home = ({ ws }) => {
         inquiryEmail: email,
         inquiryMessage: inquiry
       };
-      
+
       axios.put('/sendInquiry', body)
         .then((res) => console.log(res))
         .catch((err) => console.log(err));

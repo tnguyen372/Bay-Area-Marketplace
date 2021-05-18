@@ -26,8 +26,12 @@ const PostListing = ({ ws }) => {
         };
 
         axios.post('/postListing', listing)
-        .catch((err) => console.log(err));
-        alert('Your post was submitted!');
+        .then(alert('Your listing was submitted!'))
+        .catch((err) => {
+            alert('Error occurred with listing submission');
+            console.log(err);
+        });
+        
         // Empty the input fields after creating a listing  
         setEmail('');   
         setTitle('');
@@ -111,7 +115,7 @@ const PostListing = ({ ws }) => {
                     </Form.Group>
                         <Form.Group as={Form.Row}>
                         <Col sm={{ span: 10, offset: 2 }}>
-                        <Button type="submit" onClick={createListing}>Create Listing</Button>
+                        <Button  onClick={createListing}>Create Listing</Button>
                         </Col>
                     </Form.Group>
             </Form>    

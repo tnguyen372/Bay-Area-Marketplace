@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 
-.inquiry {
+.inquiry-page {
     color: mintcream;
     display: flex;
     flex-direction: row;
@@ -11,3 +11,46 @@
     gap: 10px;
     align-items: center;
 }
+
+#user-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
+    /* grid-auto-columns: 1fr; */
+    gap: .90em;
+    color:mintcream;
+    padding: 10px;
+  }
+
+  .user-listing-container {
+      background-color: rgb(27, 112, 146);
+      border: 2px solid mintcream;
+      padding: 10px;
+  }
+  
+  .user-listing-fields {
+    display: grid;
+    justify-content: center;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    text-align: center;
+    color:mintcream;
+    border: 1px solid mintcream;
+
+  }
+  
+  .user-listing-element {
+    width: 90%;
+    height: 40px;
+    overflow: scroll;
+  }
+  
+  .inquiries-container {
+    display:inline;
+    grid-auto-rows: 1fr;
+  }
+
+  .inquiry {
+    border: 1px solid mintcream;
+    padding: 10px;
+  }
