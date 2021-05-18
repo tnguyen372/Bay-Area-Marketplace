@@ -16,7 +16,7 @@ const PostListing = ({ ws }) => {
 
     // Submit a listing
 
-    const createListing = () => {
+    const createListing = (e) => {
         const listing = {
             email: email, 
             title: title,
@@ -24,7 +24,7 @@ const PostListing = ({ ws }) => {
             price: price,
             description: description
         };
-
+        e.preventDefault();
         axios.post('/postListing', listing)
         .then(alert('Your listing was submitted!'))
         .catch((err) => {
@@ -41,12 +41,12 @@ const PostListing = ({ ws }) => {
     };
     
     return (
-        <div>
+        <div id="post-container">
         <h1>What would you like to post?</h1>
             <div id="form-container">
                 {/*User enters data here*/}
-                <Form>
-                    <Form.Group as={Row} controlId="input-email">
+                <Form id="form">
+                    <Form.Group as={Row} controlId="input-email" id="form-item">
                         <Form.Label column sm={2} id="label">
                         Email Address
                         </Form.Label>
@@ -59,7 +59,7 @@ const PostListing = ({ ws }) => {
                         />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row} controlId="input-title">
+                    <Form.Group as={Row} controlId="input-title" id="form-item">
                         <Form.Label column sm={2} id="label">
                         Title
                         </Form.Label>
@@ -72,7 +72,7 @@ const PostListing = ({ ws }) => {
                             />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row} controlId="input-type">
+                    <Form.Group as={Row} controlId="input-type" id="form-item">
                         <Form.Label column sm={2} id="label">
                         Category
                         </Form.Label>
@@ -85,7 +85,7 @@ const PostListing = ({ ws }) => {
                             />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row} controlId="input-price">
+                    <Form.Group as={Row} controlId="input-price" id="form-item">
                         <Form.Label column sm={2} id="label">
                         Price
                         </Form.Label>
@@ -95,12 +95,12 @@ const PostListing = ({ ws }) => {
                                 step="0.01"
                                 min="0.00" 
                                 value={price}
-                                placeholder="Enter the amount you're willing to sell it for." 
+                                placeholder="Selling Price" 
                                 onChange={(event) => setPrice(event.target.value)} 
                             />
                         </Col>
                     </Form.Group>
-                    <Form.Group as={Row} controlId="input-description">
+                    <Form.Group as={Row} controlId="input-description" id="form-item">
                         <Form.Label column sm={2} id="label">
                         Description
                         </Form.Label>
@@ -113,9 +113,15 @@ const PostListing = ({ ws }) => {
                             />
                         </Col>
                     </Form.Group>
+<<<<<<< HEAD
                         <Form.Group as={Form.Row}>
                         <Col sm={{ span: 10, offset: 2 }}>
                         <Button  onClick={createListing}>Create Listing</Button>
+=======
+                    <Form.Group as={Row} id="form-item">
+                        <Col sm={{ span: 5, offset: 1 }}>
+                        <Button id="button" type="submit" onClick={(e) => {createListing(e)}}>Create Listing</Button>
+>>>>>>> a085f52477efc72f38ea967d8991bf130af55c0a
                         </Col>
                     </Form.Group>
             </Form>    
