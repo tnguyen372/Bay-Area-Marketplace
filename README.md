@@ -1,11 +1,14 @@
 # Product Listing Website
-
+Full-stack web app that lets users post listings and inquiries to existing listings. Uses WebSocket to update listings in real time.
 
 # Features
+Users can:
 - Create a product listing by filling out the form
 - Submit inquiries to any of the available product listings on the home page
-- Users can enter their email to check their previously submitted listings and any associated inquiries. Also has the option to delete a listing
+- Check their previously submitted listings and any associated inquiries by submitting their email
+- Delete a submitted listing
 
 # Technologies Used
 - Frontend: React and Bootstrap
-- Backend: Java Spark (REST API) and WebSocket, Node.js, MongoDB
+- Backend: Java Spark and WebSocket, Node.js
+- Database: MongoDB
