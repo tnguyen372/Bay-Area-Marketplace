@@ -113,15 +113,9 @@ const PostListing = ({ ws }) => {
                             />
                         </Col>
                     </Form.Group>
-<<<<<<< HEAD
                         <Form.Group as={Form.Row}>
                         <Col sm={{ span: 10, offset: 2 }}>
                         <Button  onClick={createListing}>Create Listing</Button>
-=======
-                    <Form.Group as={Row} id="form-item">
-                        <Col sm={{ span: 5, offset: 1 }}>
-                        <Button id="button" type="submit" onClick={(e) => {createListing(e)}}>Create Listing</Button>
->>>>>>> a085f52477efc72f38ea967d8991bf130af55c0a
                         </Col>
                     </Form.Group>
             </Form>    

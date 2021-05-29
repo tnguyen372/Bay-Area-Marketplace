@@ -71,7 +71,6 @@ body {
   justify-content: center;
   grid-template-rows: repeat(5, 1fr);
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 2fr;
   text-align: center;
   color:mintcream;
   border: 2px solid mintcream;
@@ -125,11 +124,4 @@ body {
     font-size: 1.2em;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     
-}
-
-#form-container {
-  border: 2px solid mintcream;
-  align-content: center;
-  
-
 }
