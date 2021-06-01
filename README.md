@@ -1,4 +1,4 @@
-# Product Listing Website
+# Product Listing Web App
 Full-stack web app that lets users post listings and inquiries to existing listings. Uses WebSocket to update listings in real time.
 
 # Features
