@@ -1,9 +1,9 @@
-# Product Listing Web App
-Full-stack web app that lets users post listings and inquiries to existing listings. Uses WebSocket to update listings in real time.
+# Product/Service Listing Web App
+Full-stack web app that lets users post product/service listings and inquiries to existing listings. Uses WebSocket to update listings in real time.
 
 # Features
 Users can:
-- Create a product listing by filling out the form
+- Create a product listing to sell an item or request a service by filling out the form
 - Submit inquiries to any of the available product listings on the home page
 - Check their previously submitted listings and any associated inquiries by submitting their email
 - Delete a submitted listing
