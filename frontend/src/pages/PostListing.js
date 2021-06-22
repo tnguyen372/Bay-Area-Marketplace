@@ -113,9 +113,11 @@ const PostListing = ({ ws }) => {
                             />
                         </Col>
                     </Form.Group>
-                        <Form.Group as={Form.Row}>
-                        <Col sm={{ span: 10, offset: 2 }}>
-                        <Button  onClick={createListing}>Create Listing</Button>
+                    <Form.Group as={Row} id="form-item">
+                        <Form.Label column sm={2} id="label">
+                        </Form.Label>
+                        <Col sm={3}>
+                        <Button onClick={createListing}>Create Listing</Button>
                         </Col>
                     </Form.Group>
             </Form>    
