@@ -1,5 +1,5 @@
 # Bay Area Marketplace
-Full-stack web app that lets users post items they want to sell or buy. Users can send email inquiries to existing listings or receive inquiries if they posted the listing. Listings and inquiries are updated in real time.
+Bay Area themed Full-stack web app that lets users post items they want to sell or buy. Users can send email inquiries to existing listings or receive inquiries if they posted the listing. Listings and inquiries are updated in real time.
 
 # Features
 Users can:
